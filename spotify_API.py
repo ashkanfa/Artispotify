@@ -6,10 +6,10 @@ import os
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-id = "1faad02f8ce445219b375a3ed949a6db"
-secret = "585e75137b444d03b7fb6ac45ad994fe"
-#client_id = os.environ.get('SPOTIPY_CLIENT_ID')
-#client_secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
+#id = "1faad02f8ce445219b375a3ed949a6db"
+#secret = "585e75137b444d03b7fb6ac45ad994fe"
+id = os.environ.get('SPOTIPY_CLIENT_ID')
+secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
 from collections import defaultdict
 
 

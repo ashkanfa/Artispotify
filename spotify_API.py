@@ -7,8 +7,8 @@ import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 #from spotify_credentials import *
-client_id = os.environ.get('SPOTIFY_CLIENT_ID')
-client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET')
+client_id = os.environ.get('SPOTIPY_CLIENT_ID')
+client_secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
 from collections import defaultdict
 
 

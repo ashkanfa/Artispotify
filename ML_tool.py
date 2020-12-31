@@ -6,7 +6,7 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
-from spotify_tools import *
+from spotify_API import *
 
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import MinMaxScaler

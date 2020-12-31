@@ -5,8 +5,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import seaborn as sns; sns.set()
-from spotify_tools import *
-from model_tools import *
+from spotify_API import *
+from ML_tool import *
 
 
 

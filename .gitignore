@@ -1,0 +1,4 @@
+*.ipynb
+.ipynb_checkpoints/
+__pycache__/
+!preliminary_models.ipynb

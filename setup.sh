@@ -8,7 +8,7 @@ email = \"ashkan.farahani@gmail.com\"\n\
 echo "\
 [deprecation]\n\
 showPyplotGlobalUse = False\n\
-" > ~/.streamlit/credentials.toml
+" > ~/.streamlit/config.toml
 
 
 echo "\

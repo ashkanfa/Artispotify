@@ -125,34 +125,34 @@ if input_artist:
         X_trans = pd.DataFrame({k:X_trans[:,n] for n, k in enumerate(col_labels)})
         # Calculate and plot the Random Forest feature importances
         sorted_mean, sorted_std, sorted_labels, sorted_colors = get_RFC_importances(forest, X_trans, y_train, col_labels)
-        #importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors)
+        importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors)
 
         #################################################################################################
                 # Create a dataframe of the results
-        mean_disp_list = []
-        msg_list = []
-        for imp in sorted_mean:
-            if imp < 0:
-                mean_disp = '- {:4.1f}%'.format(abs(imp)*100)
-                msg = 'Drives it DOWN'
-            else:
-                mean_disp = '+ {:4.1f}%'.format(imp*100)
-                msg = 'Drives it UP'
-            mean_disp_list.append(mean_disp)
-            msg_list.append(msg)
-        importances = pd.DataFrame({'Feature':sorted_labels, 'Impact on Popularity':msg_list, 'Importance':mean_disp_list})
-
-        # Plot the data and format the plot
-        #plt.style.use('fivethirtyeight')
-        fig, ax = plt.subplots(figsize=(8, 8))
-        ax.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
-        ax.set_title('Important Audio Features', fontsize=18, fontweight="bold")
-        # if st_xlabels:
-        #ax.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
-        ax.set_xlabel('Feature # (see below)', fontsize=14)
-        # else:
-        #     ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
-        ax.set_ylabel('Relative Importance', fontsize=14)
+        # mean_disp_list = []
+        # msg_list = []
+        # for imp in sorted_mean:
+        #     if imp < 0:
+        #         mean_disp = '- {:4.1f}%'.format(abs(imp)*100)
+        #         msg = 'Drives it DOWN'
+        #     else:
+        #         mean_disp = '+ {:4.1f}%'.format(imp*100)
+        #         msg = 'Drives it UP'
+        #     mean_disp_list.append(mean_disp)
+        #     msg_list.append(msg)
+        # importances = pd.DataFrame({'Feature':sorted_labels, 'Impact on Popularity':msg_list, 'Importance':mean_disp_list})
+        #
+        # # Plot the data and format the plot
+        # plt.style.use('fivethirtyeight')
+        # fig, ax = plt.subplots(figsize=(8, 8))
+        # ax.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
+        # ax.set_title('Important Audio Features', fontsize=18, fontweight="bold")
+        # # if st_xlabels:
+        # #ax.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
+        # ax.set_xlabel('Feature # (see below)', fontsize=14)
+        # # else:
+        # #     ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
+        # ax.set_ylabel('Relative Importance', fontsize=14)
         #ax.yticks(fontsize=14)
         #plt.show()
 

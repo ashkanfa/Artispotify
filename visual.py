@@ -280,13 +280,13 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
     plt.style.use('fivethirtyeight')
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
-    ax.title('Important Audio Features', fontsize=20)
-    if st_xlabels:
-        ax.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
-        ax.xlabel('Feature # (see below)', fontsize=16)
-    else:
-        ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
-    ax.ylabel('Relative Importance', fontsize=18)
-    ax.yticks(fontsize=14)
-    plt.show()
+    ax.set_title('Important Audio Features', fontsize=18, fontweight="bold")
+    # if st_xlabels:
+    #     ax.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
+    #     ax.xlabel('Feature # (see below)', fontsize=16)
+    # else:
+    #     ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
+    ax.set_ylabel('Relative Importance', fontsize=18)
+    #ax.yticks(fontsize=14)
+    #plt.show()
     return importances, fig

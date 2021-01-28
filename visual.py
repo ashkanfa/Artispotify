@@ -280,7 +280,7 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
     plt.style.use('fivethirtyeight')
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
-    ax.set_title('How Audio Features Drive Popularity', fontsize=14, fontweight="bold", 'horizontalalignment'='center')
+    ax.set_title('How Audio Features Drive Popularity', fontsize=14, fontweight="bold", horizontalalignment='center')
 
     if st_xlabels:
         ax.set_xticks(range(len(sorted_labels)))

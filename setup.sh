@@ -5,10 +5,6 @@ echo "\
 email = \"ashkan.farahani@gmail.com\"\n\
 " > ~/.streamlit/credentials.toml
 
-echo "\
-[deprecation]\n\
-showPyplotGlobalUse = False\n\
-" > ~/.streamlit/config.toml
 
 
 echo "\

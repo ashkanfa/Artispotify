@@ -292,8 +292,7 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
         ax.set_xticklabels(sorted_labels)
         ax.set_xlabel('Audio Features', fontsize=13)
         #ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
+
     ax.set_ylabel('Relative Importance', fontsize=13)
     #ax.yticks(fontsize=14)
     #plt.show()

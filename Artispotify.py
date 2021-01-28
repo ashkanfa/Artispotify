@@ -125,7 +125,7 @@ if input_artist:
         X_trans = pd.DataFrame({k:X_trans[:,n] for n, k in enumerate(col_labels)})
         # Calculate and plot the Random Forest feature importances
         sorted_mean, sorted_std, sorted_labels, sorted_colors = get_RFC_importances(forest, X_trans, y_train, col_labels)
-        importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors)
+        importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors,st_xlabels=True)
 
         #################################################################################################
                 # Create a dataframe of the results

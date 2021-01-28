@@ -40,7 +40,7 @@ error_txt = 'An error occurred. Please check your internet connection and try ag
 
 
 # Set up the main header text
-st.title('Artispotify')
+st.title('ARTISPOTIFY')
 st.markdown('**by Ashkan Farahani**')
 st.markdown(instructions_txt)
 st.markdown('***Note:*** This program requires a stable internet connection and may take a few minutes to complete running.')
@@ -63,7 +63,7 @@ if search_box:
         if res[2]:
             st.sidebar.image(res[2][2]['url'], caption=res[0], width=160)
         else:
-            st.sidebar.markdown(':crying_cat_face: *No image found* :crying_cat_face:')
+            st.sidebar.markdown('*No image found* :grey_exclamation:')
         st.sidebar.markdown('\n')
         st.sidebar.markdown('\n')
 
@@ -109,7 +109,7 @@ if input_artist:
 
 
         # Set up the header text for this section
-        st.subheader('**Audio Features Driving Popularity:**')
+        st.subheader('**On-Trend: Audio Features Driving Popularity:**')
         st.markdown(feature_txt)
 
         # Pull out the model components
@@ -125,12 +125,12 @@ if input_artist:
         X_trans = pd.DataFrame({k:X_trans[:,n] for n, k in enumerate(col_labels)})
         # Calculate and plot the Random Forest feature importances
         sorted_mean, sorted_std, sorted_labels, sorted_colors = get_RFC_importances(forest, X_trans, y_train, col_labels)
-        importances = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, True)
+        importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors)
 
         # Re-index the dataframe so it starts at 1 for better readability
         importances = importances.set_index(importances.index + 1)
         # Display the results
-        st.pyplot()
+        st.pyplot(fig)
         st.table(importances)
 
 

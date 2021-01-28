@@ -277,15 +277,16 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
     importances = pd.DataFrame({'Feature':sorted_labels, 'Impact on Popularity':msg_list, 'Importance':mean_disp_list})
 
     # Plot the data and format the plot
-    plt.figure(figsize=(8, 8))
-    plt.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
-    plt.title('Important Features', fontsize=20)
+    plt.style.use('fivethirtyeight')
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.bar(range(len(sorted_labels)), sorted_mean, yerr=sorted_std, color=sorted_colors)
+    ax.title('Important Audio Features', fontsize=20)
     if st_xlabels:
-        plt.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
-        plt.xlabel('Feature # (see below)', fontsize=16)
+        ax.xticks(range(len(sorted_labels)), range(1, len(sorted_labels) + 1), fontsize=14)
+        ax.xlabel('Feature # (see below)', fontsize=16)
     else:
-        plt.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
-    plt.ylabel('Relative Importance', fontsize=18)
-    plt.yticks(fontsize=14)
-    plt.show()
-    return importances
+        ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
+    ax.ylabel('Relative Importance', fontsize=18)
+    ax.yticks(fontsize=14)
+    #plt.show()
+    return importances, fig

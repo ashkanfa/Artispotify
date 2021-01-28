@@ -288,5 +288,5 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
         ax.xticks(range(len(sorted_labels)), sorted_labels, rotation=75, fontsize=16)
     ax.ylabel('Relative Importance', fontsize=18)
     ax.yticks(fontsize=14)
-    #plt.show()
+    plt.show()
     return importances, fig

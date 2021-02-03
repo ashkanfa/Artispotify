@@ -100,12 +100,15 @@ if input_artist:
         y_pred = clf.predict(X_test)
         song_suggestions = songs_to_promote(artist_library_df, y_test, y_pred)
 
-        st.dataframe(feats_train.iloc[:,:5])
+
         # Re-index the dataframe so it starts at 1 for better readability
         song_suggestions = song_suggestions.set_index(song_suggestions.index + 1)
         # Display the results
         loading_msg.text('')
         st.dataframe(song_suggestions)
+
+        st.subheader('**The Most Popular Tracks:**')
+        st.dataframe(feats_train.iloc[:5])
 
 
 

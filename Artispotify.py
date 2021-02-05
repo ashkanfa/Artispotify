@@ -13,7 +13,7 @@ from visual import *
 features_link = '[Audio Features](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)'
 track_link = '[Track Details](https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/)'
 # Text for the different parts of the dashboard
-instructions_txt = '**Instructions:** Artispotify is a tool for helping artists on Spotify identify new ways to grow their following. \
+instructions_txt = '**Instructions:** HitMakr is a tool for helping artists on Spotify identify new ways to grow their following. \
                     To begin, search for your name in the sidebar and click on the button for the corresponding option. \
                     The program will then pull data from the Spotify API in order to identify which features of songs from similar \
                     artists drive popularity with the fanbase. Using this information, Artispotify will suggest songs in your \

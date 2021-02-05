@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run Artispotify.py
+web: sh setup.sh && streamlit run HitMakr.py

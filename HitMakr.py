@@ -16,7 +16,7 @@ track_link = '[Track Details](https://developer.spotify.com/documentation/web-ap
 instructions_txt = '**Instructions:** HitMakr is a tool for helping artists on Spotify identify new ways to grow their following. \
                     To begin, search for your name in the sidebar and click on the button for the corresponding option. \
                     The program will then pull data from the Spotify API in order to identify which features of songs from similar \
-                    artists drive popularity with the fanbase. Using this information, Artispotify will suggest songs in your \
+                    artists drive popularity with the fanbase. Using this information, HitMakr will suggest songs in your \
                     library that are underperforming expectations and should be promoted more. It will also highlight the audio \
                     features that drive popularity up and down. Lastly, the program will provide a list of possible collaborations \
                     based on who similar artists have collaborated with in the past.'

@@ -1,2 +1,2 @@
-# Artispotify
-A platform for musicians in Spotify. 
+# HitMakr
+A platform for musicians in Spotify.

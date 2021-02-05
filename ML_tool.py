@@ -326,7 +326,7 @@ def songs_to_promote(artist_library_df, y_test, y_pred):
     y_test - the calculated popularity scores for the artist's library
     y_pred - the predicted popularity scores for the artist's library
     """
-    # Filter out the predicted false negatives
+    # Filter out the predicted false positives
     suggestion_df = artist_library_df[(y_test == 0) & (y_pred == 1)]
 
     # Sort the suggestions and return the relevant columns

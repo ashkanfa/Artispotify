@@ -40,7 +40,7 @@ error_txt = 'An error occurred. Please check your internet connection and try ag
 
 
 # Set up the main header text
-st.title('ARTISPOTIFY')
+st.title('HitMakr')
 st.markdown('**by Ashkan Farahani**')
 st.markdown(instructions_txt)
 st.markdown('***Note:*** This program requires a stable internet connection and may take a few minutes to complete running.')
@@ -107,7 +107,7 @@ if input_artist:
         loading_msg.text('')
         st.dataframe(song_suggestions)
 
-        st.subheader('**The Most Popular Tracks:**')
+        #st.subheader('**The Most Popular Tracks:**')
         # popular_tracks = reclist_df.loc[['Track_Name', 'Track_Artists', 'Track_Popularity']]
         # popular_tracks = popular_tracks.sort_values(by=['Track_Popularity',
         #                                               'Track_Artists',
@@ -118,8 +118,8 @@ if input_artist:
         #                                   'Track':suggestion_df['Track_Name']}).reset_index(drop=True)
 
         # popular_tracks_20 = popular_tracks.iloc[:20]
-        loading_msg.text('')
-        st.dataframe(reclist_df.iloc[:3])
+        #loading_msg.text('')
+        #st.dataframe(reclist_df.iloc[:3])
 
 
 

@@ -274,7 +274,7 @@ def prep_data_streamlit(artist_library_df, reclist_df):
     y_test = pop_classes(y_vals_test)
 
     # Return the training and test data, and the artist library
-    return X_train, y_train, X_test, y_test, feats_train
+    return X_train, y_train, X_test, y_test
 
 
 

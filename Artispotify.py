@@ -89,7 +89,7 @@ if input_artist:
         if reclist_df is None:
             error_txt = '**Error:** Artist library too small, no related artists found.'
         # Generate the training and test data
-        X_train, y_train, X_test, y_test, feats_train= prep_data_streamlit(artist_library_df, reclist_df)
+        X_train, y_train, X_test, y_test = prep_data_streamlit(artist_library_df, reclist_df)
 
         # Set up and fit the model
         RFC = RandomForestClassifier(class_weight='balanced_subsample', n_estimators=100, max_depth=2, random_state=0)
@@ -108,7 +108,18 @@ if input_artist:
         st.dataframe(song_suggestions)
 
         st.subheader('**The Most Popular Tracks:**')
-        st.dataframe(feats_train.iloc[:5])
+        # popular_tracks = reclist_df.loc[['Track_Name', 'Track_Artists', 'Track_Popularity']]
+        # popular_tracks = popular_tracks.sort_values(by=['Track_Popularity',
+        #                                               'Track_Artists',
+        #                                               'Track_Name'],
+        #                                           ascending=[False, True, True])
+        # song_suggestions = pd.DataFrame({'Popularity':suggestion_df['Track_Popularity'],
+        #                                  'Album':suggestion_df['Track_Album_Name'],
+        #                                   'Track':suggestion_df['Track_Name']}).reset_index(drop=True)
+
+        # popular_tracks_20 = popular_tracks.iloc[:20]
+        loading_msg.text('')
+        st.dataframe(reclist_df.iloc[:3])
 
 
 

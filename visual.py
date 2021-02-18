@@ -275,7 +275,6 @@ def plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors, 
         mean_disp_list.append(mean_disp)
         msg_list.append(msg)
     importances = pd.DataFrame({'Feature':sorted_labels, 'Impact on Popularity':msg_list, 'Importance':mean_disp_list})
-
     # Plot the data and format the plot
     plt.style.use('fivethirtyeight')
     fig, ax = plt.subplots(figsize=(8, 8))

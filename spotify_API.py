@@ -429,9 +429,10 @@ def suggested_collabs(input_artist):
     for art in range(collabs_df.shape[0]):
         source = worked_with[collabs_df.loc[art, 'Artist_ID']]
         # Remove duplicates and alphabetize
-        source = list(set(source))
+        #source = list(set(source))
         new_col.append(source)
-    collabs_df['Worked with'] = new_col
+    unrolled_col = [item[0] for item in new_col]
+    collabs_df['Worked with'] = unrolled_col
 
     # Sort the data by popularity and return the relevant information
     collabs_df = collabs_df.sort_values(by=['Artist_Popularity',

@@ -3,9 +3,16 @@
 
 # Import relevant libraries (many imports already contained within other scripts)
 import streamlit as st
+import altair as alt
 from spotify_API import *
 from ML_tool import *
 from visual import *
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import RepeatedStratifiedKFold
 
 
 
@@ -27,7 +34,7 @@ promote_txt = 'Based on the model of which types of songs are most popular for a
                re-sorted by clicking on the headers.'
 feature_txt = 'The chart and table below show the list of audio features identified as critical for driving popularity up or down for songs \
                made by similar artists. Positive values (blue bars) indicate features associated with *increased* popularity, while negative \
-               values (red bars) indicate features associated with *decreased* popularity. The small black lines indicate how variable the \
+               values (orange bars) indicate features associated with *decreased* popularity. The small black lines indicate how variable the \
                importance of these features are in the model. Further explanation of these features is available at the Spotify API \
                documentation for {} and {}.'.format(features_link, track_link)
 collab_txt = 'Below you will find a list of artists that have collaborated with other artists similar to you, along with the popularity \
@@ -42,6 +49,7 @@ error_txt = 'An error occurred. Please check your internet connection and try ag
 # Set up the main header text
 st.title('HitMakr')
 st.markdown('**by Ashkan Farahani**')
+st.markdown('**ashkan.farahani@gmail.com**')
 st.markdown(instructions_txt)
 st.markdown('***Note:*** This program requires a stable internet connection and may take a few minutes to complete running.')
 selected_header = st.subheader('*(No Artist Selected)*')
@@ -93,9 +101,31 @@ if input_artist:
 
         # Set up and fit the model
         RFC = RandomForestClassifier(class_weight='balanced_subsample', n_estimators=100, max_depth=2, random_state=0)
-        clf, cols2scale, cols2drop = build_pipeline(RFC)
-        clf.fit(X_train, y_train)
 
+
+        #########################################################################################################
+        # define models and parameters
+        #RFC = RandomForestClassifier(class_weight='balanced_subsample')
+
+        # summarize results
+        #print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+        clf, cols2scale, cols2drop = build_pipeline(RFC)
+        #clf.fit(X_train, y_train)
+        #n_estimators = [100, 500, 1000]
+        #max_features = ['sqrt', 'log2']
+        # define grid search
+        #grid = dict(model__n_estimators=n_estimators,model__max_features=max_features)
+        #cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=3, random_state=1)
+        #grid_search = GridSearchCV(estimator=clf, param_grid=grid, n_jobs=-1, cv=cv, scoring='precision',error_score=0)
+        #grid_result = grid_search.fit(X_train, y_train)
+        #precision = grid_result.best_score_
+        # Tuned model
+        #tuned_RFC = RandomForestClassifier(class_weight='balanced_subsample', n_estimators = grid_result.best_params_['model__n_estimators'], max_features = grid_result.best_params_['model__max_features']  )
+        #grid_result.best_params_['model__n_estimators']
+        #grid_result.best_params_['model__max_features']
+
+
+        clf.fit(X_train, y_train)
         # Generate suggested songs to promote based on y_pred
         y_pred = clf.predict(X_test)
         song_suggestions = songs_to_promote(artist_library_df, y_test, y_pred)
@@ -106,7 +136,7 @@ if input_artist:
         # Display the results
         loading_msg.text('')
         st.dataframe(song_suggestions)
-
+        #st.markdown('Precision:{}'.format(precision))
         #st.subheader('**The Most Popular Tracks:**')
         # popular_tracks = reclist_df.loc[['Track_Name', 'Track_Artists', 'Track_Popularity']]
         # popular_tracks = popular_tracks.sort_values(by=['Track_Popularity',
@@ -142,6 +172,22 @@ if input_artist:
         sorted_mean, sorted_std, sorted_labels, sorted_colors = get_RFC_importances(forest, X_trans, y_train, col_labels)
         importances, fig = plot_RFC_importances(sorted_mean, sorted_std, sorted_labels, sorted_colors,st_xlabels=True)
 
+        altair_df = pd.DataFrame({'importance':sorted_mean,
+                      'feature':sorted_labels})
+
+        #altair_df.sort_values(['importance'],ascending = False, inplace = True)
+
+        bars = alt.Chart(altair_df,width=700, height=600).mark_bar().encode(
+            x=alt.X("feature:N", title="Audio Features",sort=None),
+            y=alt.Y("importance:Q", title="Popularity"),
+            color=alt.condition(
+                alt.datum.importance > 0,
+                alt.value("steelblue"),
+                alt.value("orange")
+            ),
+            tooltip = ['feature']
+        )
+        st.write(bars)
         #################################################################################################
                 # Create a dataframe of the results
         # mean_disp_list = []
@@ -175,7 +221,7 @@ if input_artist:
         # Re-index the dataframe so it starts at 1 for better readability
         importances = importances.set_index(importances.index + 1)
         # Display the results
-        st.pyplot(fig)
+        #st.pyplot(fig)
         st.table(importances)
 
 

@@ -6,3 +6,4 @@ pandas==1.1.5
 spotipy==2.16.1
 numpy==1.19.2
 scikit_learn==0.24.0
+altair

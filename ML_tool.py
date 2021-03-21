@@ -320,7 +320,7 @@ def get_RFC_importances(forest, X_trans, y_train, col_labels):
 
 
 def songs_to_promote(artist_library_df, y_test, y_pred):
-    """Use the results from the model to find false negatives,
+    """Use the results from the model to find false positive,
     songs that should be popular but aren't, to suggest for promotion.
 
     artist_library_df - the tracklist of the original seed artist with all metadata

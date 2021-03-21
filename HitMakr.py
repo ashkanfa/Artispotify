@@ -44,6 +44,14 @@ collab_txt = 'Below you will find a list of artists that have collaborated with 
 # Establish a default error message in case of network disconnects
 error_txt = 'An error occurred. Please check your internet connection and try again.'
 
+model_txt = '**Modeling Approach:** From the Spotify API, given a seed artist, a network of related artist is pulled. Then from this network \
+            a pool of recommended tracks excluding seed artist library forms the training set for machine learning. Each track has audio \
+            features and popularity, which are defined by Spotify API. Then the popularity is transformed to a binary class by some decision \
+            rule and with respect to popularity a random forest model was trained. At the end this model did prediction on the artist library \
+            as the test set. False positive or tracks expected to be popular but currently not were chosen as the "promotional track recommendation \
+            and the feature importance in the trained model is used as audio trend in the artist market segment. The model was tuned for precision \
+            and on preliminary model the precision was 0.72. The performance of the model is variable since for every artist the training data will \
+            change."  '
 
 
 # Set up the main header text
@@ -91,6 +99,30 @@ if input_artist:
 
         # Pull the relevant information out of the seed data
         reclist_df = seed_results[5]
+
+        # ['Track_Name', 'Track_ID', 'Track_Artists', 'Track_Album']
+        # 'Track_Popularity'
+        onTrend_df = reclist_df[['Track_Name', 'Track_Artists', 'Track_Popularity']]
+        onTrend_df = onTrend_df.iloc[:20]
+        bars_oT = alt.Chart(source).mark_bar().encode(
+        x=alt.X("Track_Popularity:Q", title="Track Popularity"),
+        y=alt.Y("Track_Artists:N", title="Popularity")
+        )
+
+        text = bars_oT.mark_text(
+        align='left',
+        baseline='middle',
+        dx=3  # Nudges text to right so it doesn't appear on top of the bar
+        ).encode(
+        text='Track_Name:N'
+        )
+
+        (bars_oT + text).properties(height=900)
+
+        st.write(bars_oT)
+    
+
+
         artist_library_df = track_df(seed_results[2])
         # Update the error message if the artist library is too small to have related artists yet,
         # which will automatically exit the program due to an error during prep_data_streamlit()
@@ -239,6 +271,9 @@ if input_artist:
         # Display the results
         loading_msg.text('')
         st.dataframe(collab_suggestions)
+
+        # How the model works
+        st.markdown(model_txt)
 
 
 

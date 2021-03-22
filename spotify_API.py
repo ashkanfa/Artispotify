@@ -15,7 +15,7 @@ from collections import defaultdict
 
 def get_name(artist_id):
     sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id = id, client_secret=secret))
-    return sp.artist(artist_id)
+    return sp.artist(artist_id)['name']
 
 def df_listcell(input_list):
     """Helper function to store lists in individual dataframe cells."""

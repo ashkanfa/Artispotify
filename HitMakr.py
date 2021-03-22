@@ -44,14 +44,17 @@ collab_txt = 'Below you will find a list of artists that have collaborated with 
 # Establish a default error message in case of network disconnects
 error_txt = 'An error occurred. Please check your internet connection and try again.'
 
-model_txt = '**Modeling Approach:** From the Spotify API, given a seed artist, a network of related artist is pulled. Then from this network \
-            a pool of recommended tracks excluding seed artist library forms the training set for machine learning. Each track has audio \
-            features and popularity, which are defined by Spotify API. Then the popularity is transformed to a binary class by some decision \
-            rule and with respect to popularity a random forest model was trained. At the end this model did prediction on the artist library \
-            as the test set. False positive or tracks expected to be popular but currently not were chosen as the "promotional track recommendation \
-            and the feature importance in the trained model is used as audio trend in the artist market segment. The model was tuned for precision \
-            and on preliminary model the precision was 0.72. The performance of the model is variable since for every artist the training data will \
-            change."  '
+Popular_txt = 'Current top 50 popular songs similar to artist. The name of the artists are on the Y-axis with the corresponding popularity (0-100) on \
+               the X-axis. The name of the tracks are displayed on the bar chart.'
+
+model_txt = 'From the Spotify API, given a seed artist, a network of related artist is pulled. Then Spotify \
+            song recommendation runs on top of this network to get a pool of recommended tracks. These tracks will form the training set for machine \
+            learning. Each track in Spotify API has audio features and popularity. In this setting, the popularity metric is transformed to a binary \
+            class by some decision rule. For building a predictive model , with respect to popularity, a random forest model is trained using audio \
+            features. In this approach, if we take the artist library as the test set, then False positive or tracks expected to be popular but currently \
+            not, are translated into underperforming tracks with high potential for future promotions. The feature importance in the trained model is \
+            used as audio trend in the artist market segment. The model was tuned for precision and on preliminary model the precision was 0.72. \
+            The performance of the model is variable since for every artist the training data will change.'
 
 
 # Set up the main header text
@@ -90,8 +93,8 @@ if input_artist:
     # Use try-except to catch network disconnect errors
     try:
         # Set up the header text for this section and the loading message
-        st.subheader('**Songs to Promote:**')
-        st.markdown(promote_txt)
+        st.subheader('**Current Popular Songs:**')
+        st.markdown(Popular_txt)
         loading_msg = st.warning('Loading & processing data. This may take a few minutes...')
 
         # Get the artist network and track data from the Spotify API for the input artist
@@ -106,12 +109,23 @@ if input_artist:
         # onTrend_df.sort_values(by = ['Track_Popularity'], ascending = False, inplace = True)
         # onTrend_df = onTrend_df.iloc[:20]
         onTrend_df_nl = onTrend_df.nlargest(50, 'Track_Popularity')
-        onTrend_df_nl['Artist'] = onTrend_df_nl.apply(lambda x: x['Track_Artists'], axis =1)
+        onTrend_df_nl['Artist'] = onTrend_df_nl.apply(lambda x: get_name(x['Track_Artists'][0]), axis =1)
+        onTrend_df_nl.drop('Track_Artists', axis=1, inplace= True)
         #onTrend_df_nl = onTrend_df_nl.set_index(conTrend_df_nl.index + 1)
-        st.dataframe(onTrend_df_nl)
-        # bars_oT = alt.Chart(onTrend_df_nl, width=700, height=600).mark_bar().encode(
+        #onTrend_df_nl.drop('Track_Artists', axis=1)
+
+
+        bars_oT = alt.Chart(onTrend_df_nl, width=700, height=900).mark_bar().encode(
+        x=alt.X("Track_Popularity:Q", title="Track Popularity"),
+        y=alt.Y("Artist:N", title="Artist", sort = '-x'),
+        tooltip = ['Track_Name']
+        )
+
+
+        # text = alt.Chart(onTrend_df_nl, ).mark_text(align = 'left', dx=-225, color='white').encode(
         # x=alt.X("Track_Popularity:Q", title="Track Popularity"),
-        # y=alt.Y("Track_Album_Name:N", title="Album")
+        # y=alt.Y("Artist:N", title="Artist", sort = '-x'),
+        # text=alt.Text('Track_Name:N')
         # )
 
         # text = bars_oT.mark_text(
@@ -122,12 +136,16 @@ if input_artist:
         # text='Track_Name:N'
         # )
 
-        # (bars_oT + text).properties(height=900)
+        #(bars_oT + text).properties(height=900)
 
         st.write(bars_oT)
 
+        #onTrend_df_nl = onTrend_df_nl[['Artist', 'Track_Name', 'Track_Popularity']]
+        #st.dataframe(onTrend_df_nl)
 
-
+        #######################################################################################################################
+        st.subheader('**Songs to Promote:**')
+        st.markdown(promote_txt)
         artist_library_df = track_df(seed_results[2])
         # Update the error message if the artist library is too small to have related artists yet,
         # which will automatically exit the program due to an error during prep_data_streamlit()
@@ -278,6 +296,7 @@ if input_artist:
         st.dataframe(collab_suggestions)
 
         # How the model works
+        st.subheader('**Machine Learning Approach:**')
         st.markdown(model_txt)
 
 

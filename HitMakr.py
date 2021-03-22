@@ -128,17 +128,17 @@ if input_artist:
         # text=alt.Text('Track_Name:N')
         # )
 
-        # text = bars_oT.mark_text(
-        # align='left',
-        # baseline='middle',
-        # dx=3  # Nudges text to right so it doesn't appear on top of the bar
-        # ).encode(
-        # text='Track_Name:N'
-        # )
+        text = bars_oT.mark_text(
+        align='left',
+        baseline='middle',
+        dx=3  # Nudges text to right so it doesn't appear on top of the bar
+        ).encode(
+        text='Track_Popularity:Q'
+        )
 
         #(bars_oT + text).properties(height=900)
 
-        st.write(bars_oT)
+        st.write(bars_oT + text)
 
         #onTrend_df_nl = onTrend_df_nl[['Artist', 'Track_Name', 'Track_Popularity']]
         #st.dataframe(onTrend_df_nl)

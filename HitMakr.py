@@ -105,23 +105,23 @@ if input_artist:
         onTrend_df = reclist_df[['Track_Name', 'Track_Album_Name', 'Track_Popularity']]
         onTrend_df.sort_values(by = ['Track_Popularity'], ascending = False, inplace = True)
         onTrend_df = onTrend_df.iloc[:20]
-        #st.dataframe(onTrend_df)
-        bars_oT = alt.Chart(onTrend_df,width=700, height=600).mark_bar().encode(
-        x=alt.X("Track_Popularity:Q", title="Track Popularity"),
-        y=alt.Y("Track_Album_Name:N", title="Album")
-        )
-
-        text = bars_oT.mark_text(
-        align='left',
-        baseline='middle',
-        dx=3  # Nudges text to right so it doesn't appear on top of the bar
-        ).encode(
-        text='Track_Name:N'
-        )
-
-        (bars_oT + text).properties(height=900)
-
-        st.write(bars_oT)
+        st.dataframe(onTrend_df)
+        # bars_oT = alt.Chart(onTrend_df,width=700, height=600).mark_bar().encode(
+        # x=alt.X("Track_Popularity:Q", title="Track Popularity"),
+        # y=alt.Y("Track_Album_Name:N", title="Album")
+        # )
+        #
+        # text = bars_oT.mark_text(
+        # align='left',
+        # baseline='middle',
+        # dx=3  # Nudges text to right so it doesn't appear on top of the bar
+        # ).encode(
+        # text='Track_Name:N'
+        # )
+        #
+        # (bars_oT + text).properties(height=900)
+        #
+        # st.write(bars_oT)
 
 
 

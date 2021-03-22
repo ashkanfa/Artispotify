@@ -106,7 +106,7 @@ if input_artist:
         # onTrend_df.sort_values(by = ['Track_Popularity'], ascending = False, inplace = True)
         # onTrend_df = onTrend_df.iloc[:20]
         onTrend_df_nl = onTrend_df.nlargest(50, 'Track_Popularity')
-        onTrend_df_nl['Artist'] = onTrend_df_nl.apply(lambda x: get_name(x['Track_Artists']), axis =1)
+        onTrend_df_nl['Artist'] = onTrend_df_nl.apply(lambda x: x['Track_Artists']), axis =1)
         #onTrend_df_nl = onTrend_df_nl.set_index(conTrend_df_nl.index + 1)
         st.dataframe(onTrend_df_nl)
         # bars_oT = alt.Chart(onTrend_df_nl, width=700, height=600).mark_bar().encode(

@@ -45,16 +45,16 @@ collab_txt = 'Below you will find a list of artists that have collaborated with 
 error_txt = 'An error occurred. Please check your internet connection and try again.'
 
 Popular_txt = 'Current top 50 popular songs similar to artist. The name of the artists are on the Y-axis with the corresponding popularity (0-100) on \
-               the X-axis. The name of the tracks are displayed on the bar chart.'
+               the X-axis. Hover your mouse on the bars to disclose the name of the tracks.'
 
 model_txt = 'From the Spotify API, given a seed artist, a network of related artist is pulled. Then Spotify \
-            song recommendation runs on top of this network to get a pool of recommended tracks. These tracks will form the training set for machine \
-            learning. Each track in Spotify API has audio features and popularity. In this setting, the popularity metric is transformed to a binary \
-            class by some decision rule. For building a predictive model , with respect to popularity, a random forest model is trained using audio \
-            features. In this approach, if we take the artist library as the test set, then False positive or tracks expected to be popular but currently \
-            not, are translated into underperforming tracks with high potential for future promotions. The feature importance in the trained model is \
-            used as audio trend in the artist market segment. The model was tuned for precision and on preliminary model the precision was 0.72. \
-            The performance of the model is variable since for every artist the training data will change.'
+            song recommendation runs on top of this network to get a pool of recommended tracks. These tracks act as training set for the machine \
+            learning model. Each track in Spotify is identified by variables such as audio features and popularity. In this setting, the popularity metric is transformed to a binary \
+            class by some decision rule. For building a predictive model, a random forest model is trained on popularity and audio \
+            features. Once the model is trained, If we take the artist library as the test set, then False positive or tracks expected to be popular but currently \
+            currently not, are translated into underperforming tracks with high potential for future promotions. The feature importance in the trained model is \
+            used as audio trend in the artist market segment. The model was tuned for precision and on the preliminary analysis on random seeds of artists the precision was 0.72. \
+            The performance of the model is dynamic since for every artist the training data will change.'
 
 
 # Set up the main header text

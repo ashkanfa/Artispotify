@@ -104,23 +104,24 @@ if input_artist:
         # 'Track_Popularity'
         onTrend_df = reclist_df[['Track_Name', 'Track_Artists', 'Track_Popularity']]
         onTrend_df = onTrend_df.iloc[:20]
-        bars_oT = alt.Chart(source).mark_bar().encode(
-        x=alt.X("Track_Popularity:Q", title="Track Popularity"),
-        y=alt.Y("Track_Artists:N", title="Popularity")
-        )
+        st.dataframe(onTrend_df)
+        # bars_oT = alt.Chart(source).mark_bar().encode(
+        # x=alt.X("Track_Popularity:Q", title="Track Popularity"),
+        # y=alt.Y("Track_Artists:N", title="Popularity")
+        # )
+        #
+        # text = bars_oT.mark_text(
+        # align='left',
+        # baseline='middle',
+        # dx=3  # Nudges text to right so it doesn't appear on top of the bar
+        # ).encode(
+        # text='Track_Name:N'
+        # )
+        #
+        # (bars_oT + text).properties(height=900)
+        #
+        # st.write(bars_oT)
 
-        text = bars_oT.mark_text(
-        align='left',
-        baseline='middle',
-        dx=3  # Nudges text to right so it doesn't appear on top of the bar
-        ).encode(
-        text='Track_Name:N'
-        )
-
-        (bars_oT + text).properties(height=900)
-
-        st.write(bars_oT)
-    
 
 
         artist_library_df = track_df(seed_results[2])

@@ -102,15 +102,17 @@ if input_artist:
 
         # ['Track_Name', 'Track_ID', 'Track_Artists', 'Track_Album']
         # 'Track_Popularity'
-        onTrend_df = reclist_df[['Track_Name', 'Track_Album_Name', 'Track_Popularity']]
+        onTrend_df = reclist_df[['Track_Name', 'Track_Artists', 'Track_Popularity']]
         # onTrend_df.sort_values(by = ['Track_Popularity'], ascending = False, inplace = True)
         # onTrend_df = onTrend_df.iloc[:20]
         onTrend_df_nl = onTrend_df.nlargest(50, 'Track_Popularity')
-        # st.dataframe(onTrend_df.nlargest(50, 'Track_Popularity'))
-        bars_oT = alt.Chart(onTrend_df_nl, width=700, height=600).mark_bar().encode(
-        x=alt.X("Track_Popularity:Q", title="Track Popularity"),
-        y=alt.Y("Track_Album_Name:N", title="Album")
-        )
+        onTrend_df_nl['Artist'] = onTrend_df_nl['Track_Artists'].apply(lambda x: get_name(x))
+        onTrend_df_nl = onTrend_df_nl.set_index(conTrend_df_nl.index + 1)
+        st.dataframe(onTrend_df_nl)
+        # bars_oT = alt.Chart(onTrend_df_nl, width=700, height=600).mark_bar().encode(
+        # x=alt.X("Track_Popularity:Q", title="Track Popularity"),
+        # y=alt.Y("Track_Album_Name:N", title="Album")
+        # )
 
         # text = bars_oT.mark_text(
         # align='left',
